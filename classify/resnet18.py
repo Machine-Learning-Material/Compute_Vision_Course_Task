@@ -12,8 +12,8 @@ from torch.optim import lr_scheduler
 from torchvision import models
 import copy
 import sys
-from util import save_valid_result, save_train_process
-from preprocess import load_image
+from classify.util import save_valid_result, save_train_process
+from classify.preprocess import load_image, load_predict_images
 
 model_name = "resnet"
 num_classes = 2
@@ -77,11 +77,9 @@ def test(model, data_type):
         labels = labels.to(device)
         with torch.no_grad():
             outputs = model(images)
-            print(outputs)
             loss = loss_func(outputs, labels)
 
         _, predicts = torch.max(outputs, 1)
-
         loss_val += loss.item() * images.size(0)
         corrects += torch.sum(predicts.view(-1) == labels.view(-1)).item()
     test_loss = loss_val / len(test_loader.dataset)
@@ -169,6 +167,18 @@ def train():
     # 将模型的最优参数载入模型
     model.load_state_dict(best_model_params)
     torch.save(model.state_dict(), "resnet.pt")
+
+
+# 预测
+def predict():
+    image_file_list, images = load_predict_images()
+    model.eval()
+    images = images.to(device)
+    with torch.no_grad():
+        outputs = model(images)
+    _, predicts = torch.max(outputs, 1)
+    for index, name in enumerate(image_file_list):
+        print("image name: %s, predict result: %d \n", name, predicts[index])
 
 
 if __name__ == '__main__':
