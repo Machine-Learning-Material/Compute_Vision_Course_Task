@@ -64,7 +64,7 @@ def save_front_image(image_name, prediction_dir):
     img3 = np.zeros((h, w, 4))
     img3[:, :, 0:3] = img1
     img3[:, :, 3] = img2
-    front_save_dir = os.path.join(prediction_dir, "test", '0'+os.sep)
+    front_save_dir = os.path.join(prediction_dir, 'front_result'+os.sep)
     if not os.path.exists(front_save_dir):
         os.makedirs(front_save_dir, exist_ok=True)
     cv2.imwrite(front_save_dir+imidx+'.png', img3)

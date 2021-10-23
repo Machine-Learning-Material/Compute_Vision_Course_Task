@@ -29,19 +29,17 @@ def load_image(data_type, directory=None):
 def load_predict_images(directory=None):
     if directory is None:
         directory = data_dir
-    transform = transforms.Compose([
+    images = datasets.ImageFolder(os.path.join(directory, 'front_result'),
+                                  transforms.Compose([
                                       transforms.RandomResizedCrop(input_size),
                                       transforms.RandomHorizontalFlip(),
                                       transforms.ToTensor()
-                                  ])
+                                  ]))
+
     image_file_list = []
-    images = []
-    for file in os.listdir(directory):
-        file_path = os.path.join(directory, file)
-        raw_img = Image.open(file_path)
+    for file in os.listdir(os.path.join(directory, 'front_result', '0')):
         image_file_list.append(file)
-        images.append(transform(raw_img))
-    return image_file_list, images
+    return image_file_list, torch.utils.data.DataLoader(images, batch_size=len(image_file_list))
 
 
 if __name__ == '__main__':
