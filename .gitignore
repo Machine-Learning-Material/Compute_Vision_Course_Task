@@ -131,3 +131,4 @@ dmypy.json
 ./segmentation/saved_models
 ./segmentation/test_data
 ./segmentation/figures
+.idea
