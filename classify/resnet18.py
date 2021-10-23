@@ -77,6 +77,7 @@ def test(model, data_type):
         labels = labels.to(device)
         with torch.no_grad():
             outputs = model(images)
+            print(outputs)
             loss = loss_func(outputs, labels)
 
         _, predicts = torch.max(outputs, 1)

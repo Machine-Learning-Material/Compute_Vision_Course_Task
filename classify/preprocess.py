@@ -4,7 +4,7 @@ import torch
 from PIL import Image
 import matplotlib.pyplot as plt
 
-data_dir = "/home/liuzhenyu/data/resnet/ultrasound_data"
+data_dir = os.path.join(os.getcwd(), 'segmentation_results' + os.sep)
 batch_size = 32
 input_size = 384
 
