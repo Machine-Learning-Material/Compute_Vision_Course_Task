@@ -132,3 +132,6 @@ dmypy.json
 ./segmentation/test_data
 ./segmentation/figures
 .idea
+classify/resnet.pt
+segmentation/saved_models
+segmentation/test_data
