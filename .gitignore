@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+./venv
+./segmentation/saved_models
+./segmentation/test_data
+./segmentation/figures
