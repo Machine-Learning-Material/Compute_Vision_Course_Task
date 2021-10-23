@@ -86,7 +86,7 @@ def classify():
                               resnet.is_fixed, resnet.use_pretrained)
     model = model.to(resnet.device)
     model.load_state_dict(torch.load("classify/resnet.pt"))
-    resnet.predict()
+    resnet.predict(model)
 
 
 if __name__ == '__main__':

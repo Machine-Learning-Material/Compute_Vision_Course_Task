@@ -170,15 +170,16 @@ def train():
 
 
 # 预测
-def predict():
-    image_file_list, images = load_predict_images()
+def predict(model):
+    image_file_list, loader = load_predict_images()
     model.eval()
-    images = images.to(device)
-    with torch.no_grad():
-        outputs = model(images)
-    _, predicts = torch.max(outputs, 1)
-    for index, name in enumerate(image_file_list):
-        print("image name: %s, predict result: %d \n", name, predicts[index])
+    for images, labels in loader:
+        images = images.to(device)
+        with torch.no_grad():
+            outputs = model(images)
+        _, predicts = torch.max(outputs, 1)
+        for index, predict_res in enumerate(predicts):
+            print("image name: {}, predict result: {} \n".format(image_file_list[index], predict_res))
 
 
 if __name__ == '__main__':
