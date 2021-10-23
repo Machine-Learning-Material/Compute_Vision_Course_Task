@@ -9,12 +9,12 @@ import numpy as np
 from PIL import Image
 import glob
 
-from data_loader import RescaleT
-from data_loader import ToTensorLab
-from data_loader import SalObjDataset
+from segmentation.data_loader import RescaleT
+from segmentation.data_loader import ToTensorLab
+from segmentation.data_loader import SalObjDataset
 
-from model import U2NET
-from model import U2NETP
+from segmentation.model import U2NET
+from segmentation.model import U2NETP
 import cv2
 
 

@@ -9,8 +9,8 @@ import torch
 from torch.autograd import Variable
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
-from model import U2NET
-from model import U2NETP
+from segmentation.model import U2NET
+from segmentation.model import U2NETP
 import cv2
 import numpy as np
 from PIL import Image
