@@ -21,7 +21,7 @@ import classify.resnet18 as resnet
 def segmentation():
     model_name = 'u2net'  # u2netp
     image_dir = os.path.join(os.getcwd(), 'segmentation', 'test_data', 'test_images')
-    prediction_dir = os.path.join(os.getcwd(), 'segmentation_results', + os.sep)
+    prediction_dir = os.path.join(os.getcwd(), 'segmentation_results' + os.sep)
     model_dir = os.path.join(os.getcwd(), 'segmentation', 'saved_models', model_name, model_name + '.pth')
     img_name_list = glob.glob(image_dir + os.sep + '*')
     print(img_name_list)
@@ -85,8 +85,8 @@ def classify():
     model = resnet.init_model(resnet.model_name, resnet.num_classes,
                               resnet.is_fixed, resnet.use_pretrained)
     model = model.to(resnet.device)
-    model.load_state_dict(torch.load("resnet.pt"))
-    acc = resnet.test(model, "test")
+    model.load_state_dict(torch.load("classify/resnet.pt"))
+    resnet.predict()
 
 
 if __name__ == '__main__':

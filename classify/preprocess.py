@@ -26,6 +26,24 @@ def load_image(data_type, directory=None):
         return torch.utils.data.DataLoader(images, batch_size=batch_size)
 
 
+def load_predict_images(directory=None):
+    if directory is None:
+        directory = data_dir
+    transform = transforms.Compose([
+                                      transforms.RandomResizedCrop(input_size),
+                                      transforms.RandomHorizontalFlip(),
+                                      transforms.ToTensor()
+                                  ])
+    image_file_list = []
+    images = []
+    for file in os.listdir(directory):
+        file_path = os.path.join(directory, file)
+        raw_img = Image.open(file_path)
+        image_file_list.append(file)
+        images.append(transform(raw_img))
+    return image_file_list, images
+
+
 if __name__ == '__main__':
     img = Image.open("D:\\华中科技大学-研究生\\甲状腺结节诊断辅助系统\\ultrasound_data\\train\\0\\1475_2.bmp")
     print("原图大小：", img.size)
